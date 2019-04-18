@@ -9,12 +9,41 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
-library(tidycensus)
+library(tigris)
+library(sf)
+library(gganimate)
+library(ggthemes)
+library(transformr)
 
+shp = places("dc", class = "sf")
+
+dc2017 <- dc %>%
+  sample_n(200)
 
 ```
 
 ```{r}
+dc_locations <- st_as_sf(dc2017, coords = c("longitude", "latitude"), crs = 4326)
 
+ggplot(data = shp) +
+  geom_sf() +
+  geom_sf(data = dc_locations, aes(size = numshots, fill = numshots)) +
+  labs(title = "Gunfire Incidents in DC between 2006 and 2017",
+       subtitle = "Year: {round(frame_time)}", 
+       caption = "Source: ShotSpotter Data" ) +
+  
+  # added x and y axis labels
+  
+  xlab("Longitude") + 
+  ylab("Latitude") +
+  
+  # added the map and minimualist tufte themes that I like. 
+  
+  theme_map() +
+  theme_fivethirtyeight() +
+  theme(text = element_text(size = 8)) +
+  
+  # gganimated the graph to progressively show the arrests by date
+  transition_time(year)
 ```
 
