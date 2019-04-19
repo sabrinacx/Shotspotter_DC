@@ -1,6 +1,6 @@
 ---
 title: "Shotspotter_DC"
-author: "Sabrina Chok"
+author: "Jennifer Li and Sabrina Chok"
 date: "4/18/2019"
 output: html_document
 ---
