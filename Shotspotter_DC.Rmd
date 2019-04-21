@@ -2,7 +2,9 @@
 title: "Shotspotter_DC"
 author: "Jennifer Li and Sabrina Chok"
 date: "4/18/2019"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -14,6 +16,7 @@ library(sf)
 library(gganimate)
 library(ggthemes)
 library(transformr)
+library(viridis)
 
 # pulls the shape file of DC 
 
@@ -45,11 +48,11 @@ dc_sample <- dc %>%
   
   # takes a random sample of 200. Original dataset had many observations, which would have taken a while to run.
   
-  sample_n(200)
+  sample_n(10)
 
 ```
 
-```{r map, echo = FALSE}
+```{r map, echo = FALSE, cache = TRUE}
 # turns the rows into a sf object using st_as_sf and stores it as dc_locations for future use
 
 dc_locations <- st_as_sf(dc_sample,
@@ -72,7 +75,7 @@ ggplot(data = shp) +
   
   # plots the points-shaped data (dc_locations), as specified above. Changed the aesthetics to make our data better to visualize!
   
-  geom_sf(data = dc_locations, aes(size = numshots, fill = numshots)) +
+  geom_sf(data = dc_locations, aes(size = numshots, fill = numshots), show.legend = FALSE) +
   
   # we always need to label our graph! this adds a title, so that the reader understands what they are looking at 
   
@@ -84,24 +87,21 @@ ggplot(data = shp) +
        
        # # adding a caption allows us to add the source of the data the graph uses
        
-       caption = "Source: ShotSpotter Data from the Justice Tech Lab. Thank you for providing the data!" ) +
-  
-  # added x and y axis labels. ***** THEME GOT RID OF X AND Y AXIS LABELS. 
-  
-  xlab("Longitude") + 
-  ylab("Latitude") +
-  
+       caption = "Source: ShotSpotter Data from the Justice Tech Lab. Thanks for providing the data!") +
+
   # allows us to have a clean theme that is useful for displaying maps
   
   theme_map() +
   
   # added the fivethirtyeight theme that we enjoy.
   
-  theme_fivethirtyeight() +
+  theme_fivethirtyeight(base_size = 5) +
+  
+  scale_color_fivethirtyeight() + 
+  
+  # scale_fill_gradient2(midpoint = 0, mid = "white", high = "red", low = "green") +
   
   # changes the size of the title, so that it fits the map!
-  
-  theme(text = element_text(size = 4)) +
   
   # gganimated the graph to progressively show the gunfire incidents by year
   
