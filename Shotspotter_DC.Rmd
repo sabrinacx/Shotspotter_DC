@@ -48,7 +48,7 @@ dc_sample <- dc %>%
   
   # takes a random sample of 200. Original dataset had many observations, which would have taken a while to run.
   
-  sample_n(10)
+  sample_n(200)
 
 ```
 
@@ -75,7 +75,7 @@ ggplot(data = shp) +
   
   # plots the points-shaped data (dc_locations), as specified above. Changed the aesthetics to make our data better to visualize!
   
-  geom_sf(data = dc_locations, aes(size = numshots, fill = numshots), show.legend = FALSE) +
+  geom_sf(data = dc_locations, aes(size = numshots, fill = numshots, color = numshots)) +
   
   # we always need to label our graph! this adds a title, so that the reader understands what they are looking at 
   
@@ -97,7 +97,7 @@ ggplot(data = shp) +
   
   theme_fivethirtyeight(base_size = 5) +
   
-  scale_color_fivethirtyeight() + 
+  scale_size( guide = "none") +
   
   # scale_fill_gradient2(midpoint = 0, mid = "white", high = "red", low = "green") +
   
