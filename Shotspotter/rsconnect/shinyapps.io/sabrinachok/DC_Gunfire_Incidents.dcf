@@ -1,0 +1,12 @@
+name: DC_Gunfire_Incidents
+title: DC_Gunfire_Incidents
+username:
+account: sabrinachok
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 883308
+bundleId: 2031197
+url: https://sabrinachok.shinyapps.io/DC_Gunfire_Incidents/
+when: 1555982180.05814
+asMultiple: FALSE
+asStatic: FALSE
