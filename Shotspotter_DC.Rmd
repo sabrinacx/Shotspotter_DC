@@ -48,7 +48,7 @@ dc_sample <- dc %>%
   
   # takes a random sample of 200. Original dataset had many observations, which would have taken a while to run.
   
-  sample_n(200)
+  sample_n(500)
 
 ```
 
